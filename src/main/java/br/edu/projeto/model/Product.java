@@ -27,6 +27,8 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     //Nome da coluna na tabela, necessário indicar quando atributo não tiver o mesmo nome
 //    @Column(name = "id_product")
+    @NotNull
+    @NotEmpty
     private Integer id;
 
     @NotEmpty
@@ -66,7 +68,7 @@ public class Product {
     //Mapeia tabela intermediária (criada em relacionamentos Muitos para muitos), não é necessário uma classe modelo para a tabela intermediária
     @JoinTable(
       name = "permissao",
-      joinColumns = @JoinColumn(name = "id_usuario"),
+      joinColumns = @JoinColumn(name = "id_product"),
       inverseJoinColumns = @JoinColumn(name = "id_tipo_permissao")
     )
     private List<TipoPermissao> permissoes = new ArrayList<TipoPermissao>();

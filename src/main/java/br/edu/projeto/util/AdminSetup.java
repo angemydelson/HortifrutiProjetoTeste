@@ -31,6 +31,9 @@ public class AdminSetup implements ServletContextListener {
         if (usuarioDAO.ehUsuarioUnico("admin")){ 	
 	    	admin = new Usuario();
 	        admin.setEmail("admin@admin.com");
+	        admin.setCidade("Chapecó");
+	        admin.setPais("Brasil");
+	        admin.setCpf("70876650221");
 	        String senhaPadrao = "admin";
 	        admin.setSenha(passwordHash.generate(senhaPadrao.toCharArray()));
 	        admin.setUsuario("admin");

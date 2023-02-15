@@ -40,8 +40,8 @@ public class CadastroProductController implements Serializable {
 	
 	//atributos que não podem ser serializáveis (normalmente dependências externas) devem ser marcados como transient 
 	//(eles são novamente criados a cada nova requisição independente do escopo da classe)
-	@Inject
-    transient private Pbkdf2PasswordHash passwordHash;
+//	@Inject
+//    transient private Pbkdf2PasswordHash passwordHash;
 	
 	@Inject
     private ProductDAO productDAO;
@@ -69,14 +69,14 @@ public class CadastroProductController implements Serializable {
     	//Inicializa elementos importantes
     	this.permissoesSelecionadas = new ArrayList<Integer>();
     	this.listaProducts = productDAO.listarTodos();
-    	//O elemento de checkbox da tela usa uma lista do tipo SelectItem
-    	this.permissoes = new ArrayList<SelectItem>();
-    	//É necessário mapear a lista de permissões manualmente para o tipo SelectItem
-    	for (TipoPermissao p: this.tipoPermissaoDAO.listarTodos()) {
-    		//O primeiro elemento é a chave (oculta) e o segundo a descrição que aparecerá para o usuário em tela
-    		SelectItem i = new SelectItem(p.getPermissao().id, p.getPermissao().name());		
-    		this.permissoes.add(i);
-    	}
+//    	//O elemento de checkbox da tela usa uma lista do tipo SelectItem
+//    	this.permissoes = new ArrayList<SelectItem>();
+//    	//É necessário mapear a lista de permissões manualmente para o tipo SelectItem
+//    	for (TipoPermissao p: this.tipoPermissaoDAO.listarTodos()) {
+//    		//O primeiro elemento é a chave (oculta) e o segundo a descrição que aparecerá para o usuário em tela
+//    		SelectItem i = new SelectItem(p.getPermissao().id, p.getPermissao().name());		
+//    		this.permissoes.add(i);
+//    	}
     }
 	
     //Chamado pelo botão novo
@@ -94,7 +94,8 @@ public class CadastroProductController implements Serializable {
     		for (Integer id: this.permissoesSelecionadas) {
     			TipoPermissao permissao = tipoPermissaoDAO.encontrarPermissao(id);
     			//Chama método que adiciona o usuário para a permissão e vice-versa (necessário em relacionamento ManyToMany)
-    			permissao.addProduct(this.product);	
+//    			permissao.addProduct(this.product);	
+    			
     		}
         	try {
         		//Aplica Hash na senha
@@ -110,8 +111,8 @@ public class CadastroProductController implements Serializable {
         		//Após salvar usuário é necessário recarregar lista que popula tabela com os novos dados
 		        this.listaProducts = productDAO.listarTodos();
 		        //Atualiza e executa elementos Javascript na tela assincronamente
-			    PrimeFaces.current().executeScript("PF('usuarioDialog').hide()");
-			    PrimeFaces.current().ajax().update("form:messages", "form:dt-usuarios");
+			    PrimeFaces.current().executeScript("PF('productDialog').hide()");
+			    PrimeFaces.current().ajax().update("form:messages", "form:dt-products");
 	        } catch (Exception e) {
 	            String errorMessage = getMensagemErro(e);
 	            this.facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage, null));
@@ -121,12 +122,12 @@ public class CadastroProductController implements Serializable {
 	
 	//Realiza validações adicionais (não relizadas no modelo) e/ou complexas/interdependentes
 	private boolean usuarioValido() {
-		if (this.permissoesSelecionadas.isEmpty()) {
-			this.facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Selecione ao menos uma permissão para o novo usuário.", null));
-			return false;
-		}			
-		if (this.product.getId() == null && !this.productDAO.ehUsuarioUnico(this.product.getNome())) {
-			this.facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Este nome de usuário já está em uso.", null));
+//		if (this.permissoesSelecionadas.isEmpty()) {
+//			this.facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Selecione ao menos uma permissão para o novo usuário.", null));
+//			return false;
+//		}			
+		if (this.product.getId() == null && !this.productDAO.ehProductUnico(this.product.getNome())) {
+			this.facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Este nome de produto já está em uso.", null));
 			return false;
 		}
 		return true;

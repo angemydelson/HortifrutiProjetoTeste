@@ -30,7 +30,7 @@ public class ProductDAO implements Serializable{
 	
 	//Query usando a API Criteria do Hibernate
 	//Indicada para consultas complexas
-	public Boolean ehUsuarioUnico(String u) {
+	public Boolean ehProductUnico(String u) {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Product> criteria = cb.createQuery(Product.class);
         Root<Product> product = criteria.from(Product.class);

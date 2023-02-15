@@ -35,7 +35,7 @@ public class TipoPermissao {
     //A classe dominada possui o parâmetro mappedBy, essa classe nunca persistirá alterações na classe/tabela dominante
     @ManyToMany(mappedBy = "permissoes", fetch = FetchType.EAGER)
     private List<Usuario> usuarios = new ArrayList<Usuario>();
-    private List<Product> products = new ArrayList<Product>();
+//    private List<Product> products = new ArrayList<Product>();
 
 	public Integer getId() {
 		return id;
@@ -56,9 +56,9 @@ public class TipoPermissao {
 	public List<Usuario> getUsuarios() {
 		return usuarios;
 	}
-	public List<Product> getProducts() {
-		return products;
-	}
+//	public List<Product> getProducts() {
+//		return products;
+//	}
 
 	//Para persistir elementos de uma classe dominada é necessário adicionar o elementos de ambos os lados
 	//Por isso é comum fazer um método especial para isso
@@ -67,10 +67,10 @@ public class TipoPermissao {
 		usuario.getPermissoes().add(this);
 	}
 	
-	public void addProduct(Product product) {
-		this.products.add(product);
-		product.getPermissoes().add(this);
-	}
+//	public void addProduct(Product product) {
+//		this.products.add(product);
+//		product.getPermissoes().add(this);
+//	}
 	
 }
 

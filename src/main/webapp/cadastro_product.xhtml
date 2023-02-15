@@ -24,26 +24,26 @@
         	<p:growl id="messages"/>
 	        <p:dialog header="Novo Produto" showEffect="fade" modal="true" widgetVar="productDialog" responsive="true">   
 	            <p:outputPanel id="product-conteudo-dialog" class="ui-fluid">
-	                <p:outputPanel rendered="#{not empty cadastroUsuarioController.product}">
+	                <p:outputPanel rendered="#{not empty cadastroProductController.product}">
 	                    <div class="field">
 	                        <p:outputLabel for="codigo">Código</p:outputLabel>
-	                        <p:inputText id="codigo" value="#{cadastroUsuarioController.product.codigo}" required="true" />
+	                        <p:inputText id="codigo" value="#{cadastroProductController.product.codigo}" required="true" />
 	                    </div>
 	                    <div class="field">
 	                        <p:outputLabel for="nome">Nome do Produto</p:outputLabel>
-	                        <p:inputText id="nome" value="#{cadastroUsuarioController.product.nome}" required="true"/>
+	                        <p:inputText id="nome" value="#{cadastroProductController.product.nome}" required="true"/>
 	                    </div>
 	                    <div class="field">
 	                        <p:outputLabel for="quantityint">Quantidade</p:outputLabel>
-	                        <p:inputText id="quantityint" value="#{cadastroUsuarioController.product.quantityint}" required="true"/>
+	                        <p:inputText id="quantityint" value="#{cadastroProductController.product.quantityint}" required="true"/>
 	                    </div>
 	                     <div class="field">
 	                        <p:outputLabel for="quantitykl">Quantidade por (kg)</p:outputLabel>
-	                        <p:inputText id="quantitykl" value="#{cadastroUsuarioController.product.quantitykl}" required="true"/>
+	                        <p:inputText id="quantitykl" value="#{cadastroProductController.product.quantitykl}" required="true"/>
 	                    </div>
 	                     <div class="field">
-	                        <p:outputLabel for="cidade">Preço Unitário</p:outputLabel>
-	                        <p:inputText id="cidade" value="#{cadastroProductController.product.priceun}" required="true"/>
+	                        <p:outputLabel for="priceund">Preço Unitário</p:outputLabel>
+	                        <p:inputText id="priceund" value="#{cadastroProductController.product.priceund}" required="true"/>
 	                    </div>
 	                     <div class="field">
 	                        <p:outputLabel for="pricekl">Preço por (kg)</p:outputLabel>
@@ -59,19 +59,19 @@
 	                    </div>
 	                    
 	                    
-	                    <div class="field">
+	                    <!-- <div class="field">
                         <p:outputLabel for="permissao">Permissão</p:outputLabel>
                         <p:selectCheckboxMenu id="permissao" value="#{cadastroProductController.permissoesSelecionadas}" label="Selecione uma permissão">
                             <f:selectItems value="#{cadastroProductController.permissoes}"/>
                         </p:selectCheckboxMenu>
-                    </div>
+                    </div> -->
 	                </p:outputPanel>
 	            </p:outputPanel>
 	
 	            <f:facet name="footer">
 	                <p:commandButton value="Salvar" icon="pi pi-check" actionListener="#{cadastroProductController.salvar}"
-	                    update="product-conteudo-dialog dialogs:messages" process="usuario-conteudo-dialog @this" />
-	                <p:commandButton value="Cancelar" icon="pi pi-times" onclick="PF('usuarioDialog').hide()" class="ui-button-secondary" type="button" />
+	                    update="product-conteudo-dialog dialogs:messages" process="product-conteudo-dialog @this" />
+	                <p:commandButton value="Cancelar" icon="pi pi-times" onclick="PF('productDialog').hide()" class="ui-button-secondary" type="button" />
 	            </f:facet>
 	        </p:dialog>
 
@@ -118,7 +118,7 @@
 	                <h:outputText value="#{us.quantitykl}" />
 	            </p:column>
 	            <p:column headerText="Preço Unitário">
-	                <h:outputText value="#{us.priceun}" />
+	                <h:outputText value="#{us.priceund}" />
 	            </p:column>
 	             <p:column headerText="Preço por (kg)">
 	                <h:outputText value="#{us.pricekl}" />
